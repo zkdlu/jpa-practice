@@ -15,14 +15,12 @@ public class JpaMain {
         tx.begin();
 
         try {
-            List<Member> members = em.createQuery("select m from Member as m where m.id > 0", Member.class)
-                    .setFirstResult(0)
-                    .setMaxResults(10)
-                    .getResultList();
-
-            for (Member member : members) {
-                System.out.println(member.getName());
-            }
+            // 비영속
+            Member member = new Member();
+            member.setId(10L);
+            member.setRoleType(RoleType.ADMIN);
+            // 영속
+            em.persist(member);
 
             tx.commit();
         } catch (Exception e) {
@@ -32,6 +30,17 @@ public class JpaMain {
         }
 
         emf.close();;
+    }
+
+    private static void doJpql(EntityManager em) {
+        List<Member> members = em.createQuery("select m from Member as m where m.id > 0", Member.class)
+                .setFirstResult(0)
+                .setMaxResults(10)
+                .getResultList();
+
+        for (Member member : members) {
+            System.out.println(member.getName());
+        }
     }
 
     private static void deleteMember(EntityManager em, Member findMember) {
