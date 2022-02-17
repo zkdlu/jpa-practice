@@ -14,11 +14,9 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setId(2L);
-            member.setName("lee");
+            Member findMember = findMember(em, 1L);
 
-            em.persist(member);
+            findMember.setName("안녕안녕");
 
             tx.commit();
         } catch (Exception e) {
@@ -28,5 +26,21 @@ public class JpaMain {
         }
 
         emf.close();;
+    }
+
+    private static void deleteMember(EntityManager em, Member findMember) {
+        em.remove(findMember);
+    }
+
+    private static void saveMember(EntityManager em, long id, String name) {
+        Member member = new Member();
+        member.setId(id);
+        member.setName(name);
+
+        em.persist(member);
+    }
+
+    private static Member findMember(EntityManager em, long id) {
+        return em.find(Member.class, id);
     }
 }
