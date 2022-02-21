@@ -9,6 +9,8 @@
         <class>jpabook.jpashop.domain.Item</class>
         <class>jpabook.jpashop.domain.Order</class>
         <class>jpabook.jpashop.domain.OrderItem</class>
+        <class>jpabook.jpashop.domain.Delivery</class>
+        <class>jpabook.jpashop.domain.Category</class>
         <properties>
             <property name="javax.persistence.jdbc.Driver" value="com.h2.Driver" />
             <property name="javax.persistence.jdbc.user" value="sa" />
