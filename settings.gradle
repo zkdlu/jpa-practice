@@ -3,4 +3,5 @@ rootProject.name = 'jpa-practice'
 include 'hello-jpa'
 include 'jpa-shop01'
 include 'jpa02-relation'
+include 'jpa03-relation'
 
