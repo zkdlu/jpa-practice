@@ -1,12 +1,13 @@
-package jpa.relation;
+package jpa.inheritance;
 
-import jpa.relation.domain.Member;
-import jpa.relation.domain.Team;
+import jpa.inheritance.domain.Member;
+import jpa.inheritance.domain.Team;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -32,9 +33,11 @@ public class Main {
             em.clear(); // 영속성 컨텍스트 초기화
 
             Member findMember = em.find(Member.class, member.getId());
-            Team findTeam = findMember.getTeam();
+            List<Member> members = findMember.getTeam().getMembers();
 
-            System.out.println("findTeam = " + findTeam.getName());
+            for (Member m : members) {
+                System.out.println("m = " + m.getName());
+            }
 
             tx.commit();
         } catch (Exception e) {

@@ -5,8 +5,10 @@
  http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 
     <persistence-unit name="hello-jpa">
-        <class>jpa.inheritance.domain.Member</class>
-        <class>jpa.inheritance.domain.Team</class>
+        <class>jpa.inheritance.domain.Item</class>
+        <class>jpa.inheritance.domain.Book</class>
+        <class>jpa.inheritance.domain.Album</class>
+        <class>jpa.inheritance.domain.Movie</class>
         <properties>
             <property name="javax.persistence.jdbc.Driver" value="com.h2.Driver" />
             <property name="javax.persistence.jdbc.user" value="sa" />
@@ -17,7 +19,7 @@
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true" />
             <property name="hibernate.use_sql_comments" value="true" />
-            <property name="hibernate.hbm2ddl.auto" value="create" />
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
         </properties>
     </persistence-unit>
 </persistence>

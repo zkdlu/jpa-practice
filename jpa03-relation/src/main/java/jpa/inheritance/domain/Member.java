@@ -1,4 +1,4 @@
-package jpa.relation.domain;
+package jpa.inheritance.domain;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,19 +7,20 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-@Getter @Setter
+@Getter
+@Setter
 @Entity
-public class Team {
+public class Member {
     @Id @GeneratedValue
-    @Column(name = "TEAM_ID")
+    @Column(name = "MEMBER_ID")
     private Long id;
     @Column(name = "NAME")
     private String name;
 
-    @OneToMany(mappedBy = "team")
-    private List<Member> members = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
 }
