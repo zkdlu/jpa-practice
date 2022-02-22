@@ -9,6 +9,7 @@
         <class>jpa.inheritance.domain.Book</class>
         <class>jpa.inheritance.domain.Album</class>
         <class>jpa.inheritance.domain.Movie</class>
+        <class>jpa.inheritance.domain.Member</class>
         <properties>
             <property name="javax.persistence.jdbc.Driver" value="com.h2.Driver" />
             <property name="javax.persistence.jdbc.user" value="sa" />
