@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 @Getter
 @Setter
 @Entity
-public class OrderItem {
+public class OrderItem extends BaseEntity {
     @Id @GeneratedValue
     @Column(name = "order_item_id")
     private Long id;
