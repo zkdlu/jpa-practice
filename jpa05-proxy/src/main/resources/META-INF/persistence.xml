@@ -6,6 +6,7 @@
 
     <persistence-unit name="hello-jpa">
         <class>jpa.proxy.domain.Member</class>
+        <class>jpa.proxy.domain.Team</class>
         <properties>
             <property name="javax.persistence.jdbc.Driver" value="com.h2.Driver" />
             <property name="javax.persistence.jdbc.user" value="sa" />
