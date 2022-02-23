@@ -1,6 +1,7 @@
 package jpa.proxy;
 
 import jpa.proxy.domain.Member;
+import org.hibernate.Hibernate;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -44,6 +45,10 @@ public class Main {
             System.out.println("findMember = " + findMember.getClass());
 
             System.out.println("ref == find : " + (refMember == findMember));
+
+            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(refMember));
+            Hibernate.initialize(refMember); // JPA 표준 아님
+            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(refMember));
 
             tx.commit();
         } catch (Exception e) {
