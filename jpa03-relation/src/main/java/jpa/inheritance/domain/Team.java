@@ -3,6 +3,7 @@ package jpa.inheritance.domain;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +21,6 @@ public class Team {
     @Column(name = "NAME")
     private String name;
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "team", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Member> members = new ArrayList<>();
 }
