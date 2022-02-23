@@ -6,4 +6,5 @@ include 'jpa02-relation'
 include 'jpa03-relation'
 include 'jpa04-inheritance'
 include 'jpa05-proxy'
+include 'jpa06-valueType'
 
