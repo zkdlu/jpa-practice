@@ -18,12 +18,21 @@ public class Main {
         tx.begin();
 
         try {
+            Address address = new Address("city", "street", "zip");
+
             Member member = new Member();
             member.setName("lee");
-
-            member.setAddress(new Address("city", "street", "zip"));
+            member.setAddress(address);
             member.setPeriod(new Period());
             em.persist(member);
+
+            Member member2 = new Member();
+            member2.setName("lee");
+            member2.setAddress(address);
+            member2.setPeriod(new Period());
+            em.persist(member2);
+
+            address.setCity("newCity");
 
             tx.commit();
         } catch (Exception e) {
