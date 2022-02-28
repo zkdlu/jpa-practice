@@ -20,17 +20,7 @@ public class Main {
         tx.begin();
 
         try {
-            for (int i = 0; i < 100; i++) {
-                Member member = new Member();
-                member.setName("lee" + i);
-                member.setAge(i);
-                em.persist(member);
-            }
-
-            em.flush();
-            em.clear();
-
-            paging(em);
+            join(em);
 
             tx.commit();
         } catch (Exception e) {
@@ -41,6 +31,24 @@ public class Main {
         }
 
         emf.close();
+    }
+
+    private static void join(EntityManager em) {
+        Team team = new Team();
+        team.setName("team");
+        em.persist(team);
+
+        Member member = new Member();
+        member.setName("lee");
+        member.changeTeam(team);
+        em.persist(member);
+
+        em.flush();
+        em.clear();
+
+        em.createQuery("select m from Member m inner join m.team t", Member.class).getResultList();
+        em.createQuery("select m from Member m left outer join m.team t on t.name = 'team'", Member.class).getResultList();
+        em.createQuery("select m from Member m, Team t where m.name = t.name", Member.class).getResultList();
     }
 
     private static void paging(EntityManager em) {
