@@ -32,8 +32,6 @@ public class Main {
             em.flush();
             em.clear();
 
-            subQuery(em);
-
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
@@ -43,6 +41,16 @@ public class Main {
         }
 
         emf.close();
+    }
+
+    private static void conditionExpression(EntityManager em) {
+        String query = "select " +
+                "case when m.age <= 10 then '학생요금' " +
+                "     when m.age >= 60 then '경로요금' " +
+                "     else '일반요금' " +
+                "end " +
+                "from Member m";
+        em.createQuery(query, String.class).getResultList();
     }
 
     private static void subQuery(EntityManager em) {
