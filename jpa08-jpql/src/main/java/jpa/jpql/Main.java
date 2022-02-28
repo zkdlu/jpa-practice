@@ -20,19 +20,17 @@ public class Main {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setName("lee");
-            member.setAge(25);
-            em.persist(member);
+            for (int i = 0; i < 100; i++) {
+                Member member = new Member();
+                member.setName("lee" + i);
+                member.setAge(i);
+                em.persist(member);
+            }
 
             em.flush();
             em.clear();
 
-            jpql(em);
-
-            projection(em);
-
-            projection2(em);
+            paging(em);
 
             tx.commit();
         } catch (Exception e) {
@@ -43,6 +41,17 @@ public class Main {
         }
 
         emf.close();
+    }
+
+    private static void paging(EntityManager em) {
+        List<Member> members = em.createQuery("select m from Member m order by m.age desc", Member.class)
+                .setFirstResult(0)
+                .setMaxResults(10)
+                .getResultList();
+        System.out.println(members.size());
+        for (Member mem : members) {
+            System.out.println("mem = " + mem.getAge());
+        }
     }
 
 
@@ -72,5 +81,4 @@ public class Main {
             System.out.println("memberDTO.getName() = " + memberDTO.getAge());
         }
     }
-
 }
