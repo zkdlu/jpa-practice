@@ -20,7 +20,19 @@ public class Main {
         tx.begin();
 
         try {
-            join(em);
+            Team team = new Team();
+            team.setName("team");
+            em.persist(team);
+
+            Member member = new Member();
+            member.setName("lee");
+            member.changeTeam(team);
+            em.persist(member);
+
+            em.flush();
+            em.clear();
+
+            subQuery(em);
 
             tx.commit();
         } catch (Exception e) {
@@ -33,19 +45,17 @@ public class Main {
         emf.close();
     }
 
+    private static void subQuery(EntityManager em) {
+        // exists
+        // where o > ALL(select ...)
+        // where o > ANY(select ...)
+        em.createQuery("select m from Member m where exists (select t from m.team t where t.name = 'team')", Member.class)
+                .getResultList();
+        em.createQuery("select m from Member m where m.age > (select avg(m2.age) from Member m2)", Member.class)
+                .getResultList();
+    }
+
     private static void join(EntityManager em) {
-        Team team = new Team();
-        team.setName("team");
-        em.persist(team);
-
-        Member member = new Member();
-        member.setName("lee");
-        member.changeTeam(team);
-        em.persist(member);
-
-        em.flush();
-        em.clear();
-
         em.createQuery("select m from Member m inner join m.team t", Member.class).getResultList();
         em.createQuery("select m from Member m left outer join m.team t on t.name = 'team'", Member.class).getResultList();
         em.createQuery("select m from Member m, Team t where m.name = t.name", Member.class).getResultList();
