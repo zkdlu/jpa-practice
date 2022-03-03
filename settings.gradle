@@ -9,4 +9,5 @@ include 'jpa05-proxy'
 include 'jpa06-valueType'
 include 'jpa07-valueCollection'
 include 'jpa08-jpql'
+include 'jpa09-jpql2'
 

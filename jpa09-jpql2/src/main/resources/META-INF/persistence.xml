@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+    <persistence-unit name="hello-jpa">
+        <class>jpa.jpql.domain.Member</class>
+        <class>jpa.jpql.domain.Team</class>
+        <class>jpa.jpql.domain.Order</class>
+        <class>jpa.jpql.domain.Product</class>
+        <properties>
+            <property name="javax.persistence.jdbc.Driver" value="com.h2.Driver" />
+            <property name="javax.persistence.jdbc.user" value="sa" />
+            <property name="javax.persistence.jdbc.password" value="" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/study/h2/test"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.format_sql" value="true" />
+            <property name="hibernate.use_sql_comments" value="true" />
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+        </properties>
+    </persistence-unit>
+</persistence>
