@@ -47,9 +47,9 @@ public class Main {
 
 //            pathExpression(em);
 
-//            fetchJoin(em);
+            fetchJoin(em);
 
-            collectionFetchJoin(em);
+//            collectionFetchJoin(em);
 
             tx.commit();
         } catch (Exception e) {
@@ -63,7 +63,8 @@ public class Main {
     }
 
     private static void collectionFetchJoin(EntityManager em) {
-        List<Team> teams = em.createQuery("select t from Team t join fetch t.members", Team.class).getResultList();
+        List<Team> teams = em.createQuery("select t from Team t join fetch t.members", Team.class)
+                .getResultList();
         for (Team team : teams) {
             System.out.println("team.getName() = " + team.getName() + ", " + team.getMembers().size());
             for (Member member : team.getMembers()) {
@@ -89,15 +90,23 @@ public class Main {
     }
 
     private static void fetchJoin(EntityManager em) {
-        List<Member> mems = em.createQuery("select m from Member m", Member.class).getResultList();
-        for (Member mem : mems) {
-            System.out.println("mem.getName() = " + mem.getName() + ", " + mem.getTeam().getName());
+        List<Team> teams = em.createQuery("select t from Team t", Team.class).getResultList();
+        for (Team team : teams) {
+            System.out.println("team.getName() = " + team.getName());
+            for (Member member : team.getMembers()) {
+                System.out.println("======> member.getName() = " + member.getName());
+            }
         }
-        System.out.println("=============================");
-        mems = em.createQuery("select m from Member m join fetch m.team", Member.class).getResultList();
-        for (Member mem : mems) {
-            System.out.println("mem.getName() = " + mem.getName() + ", " + mem.getTeam().getName());
-        }
+//        System.out.println("=============================");
+//        List<Member> mems = em.createQuery("select m from Member m", Member.class).getResultList();
+//        for (Member mem : mems) {
+//            System.out.println("mem.getName() = " + mem.getName() + ", " + mem.getTeam().getName());
+//        }
+//        System.out.println("=============================");
+//        mems = em.createQuery("select m from Member m join fetch m.team", Member.class).getResultList();
+//        for (Member mem : mems) {
+//            System.out.println("mem.getName() = " + mem.getName() + ", " + mem.getTeam().getName());
+//        }
     }
 
     private static void pathExpression(EntityManager em) {
